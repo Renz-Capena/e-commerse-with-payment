@@ -9,6 +9,12 @@
     $stmt = $con->prepare($sql);
     $stmt->execute([$id]);
     $fetch = $stmt->fetch();
+
+    // get cart count user
+    $getCartUserCount = "SELECT * FROM carts WHERE user_id = ?";
+    $count_stmt = $con->prepare($getCartUserCount);
+    $count_stmt->execute([$id]);
+
 ?>
 <div class='container mt-3 p-0'>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -19,11 +25,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <li class="nav-item ">
+              <a class="nav-link text-dark" aria-current="page" href="home.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cart</a>
+              <a class="nav-link text-dark" href="cart.php">
+                Cart
+                <?php if($count_stmt->rowCount()){ ?> 
+                  <span class='countCart'><?php echo $count_stmt->rowCount() ?></span></a>
+                <?php } ?>
             </li>
           </ul>
           <div class='mx-5'>

@@ -94,4 +94,16 @@
         // header("refresh: 0");
     }
 
+    // DELETE BTN
+    // console.log(payment.value)
+    if(isset($_POST['deleteBtn'])){
+        $cartId = $_POST['cart_id'];
+
+        $deleteSql = "DELETE FROM carts WHERE id = ?";
+        $stmt = $con->prepare($deleteSql);
+        $stmt->execute([$cartId]);
+
+        header("location: cart.php");
+    }
+
 
