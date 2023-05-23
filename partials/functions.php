@@ -76,4 +76,22 @@
         }
     }
 
+    // ADD TO CART BUTTON
+
+
+    if(isset($_POST['cartBtn1']) || isset($_POST['cartBtn2']) || isset($_POST['cartBtn3'])){
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $desc = $_POST['description'];
+        $price = $_POST['price'];
+
+        $sql = "INSERT INTO carts (user_id,name,description,price) VALUES (?,?,?,?)";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$id,$name,$desc,$price]);
+
+
+        header("location: home.php");
+        // header("refresh: 0");
+    }
+
 

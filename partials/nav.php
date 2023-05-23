@@ -1,7 +1,7 @@
 <?php
     require "db.php";
 
-    session_start();
+    // session_start();
 
     $id = $_SESSION['userId'];
 
